@@ -26,7 +26,9 @@ const Table = () => {
             <td>{id}</td>
             <td>{first_name}</td>
             <td>{last_name}</td>
-            <td>{avatar}</td>
+            <td>
+                <img src={avatar} alt="Avatar"></img>
+            </td>
             <td>{email}</td>
           </tr>
         )
