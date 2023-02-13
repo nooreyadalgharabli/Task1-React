@@ -6,7 +6,7 @@ const Table = ({  setEditData, data, setData, setShowModale }) => {
 
 // capture the user you wish to edit, set to state
   function captureEdit(clickedID) {
-    let filtered = data.find(customer => customer.id === clickedID)
+    let filtered = data.find(user => user.id === clickedID)
     setEditData(filtered)
   }
 
@@ -29,7 +29,7 @@ const Table = ({  setEditData, data, setData, setShowModale }) => {
           </td>
           <td>{email}</td>
           <td>
-            <button className="btn-edit" key={id} onClick={() => { setShowModale(); captureEdit(id); }}>Edit</button>
+            <button className="btn-edit" onClick={() => { setShowModale(); captureEdit(id); }}>Edit</button>
             <button onClick={(el) => deleteHandler(el, id)}>Delete</button>
           </td>
         </tr>

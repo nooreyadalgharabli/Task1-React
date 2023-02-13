@@ -2,7 +2,7 @@ import React from 'react'
 import Form from '../Form/Form';
 
 
-const EditUserData = ({ onUpdateUser, editData, setEditData, data, setData, closeModal}) => {
+const EditUserData = ({ onUpdateUser, editData, setEditData, closeModal}) => {
 
     let {id, first_name, last_name, avatar, email} = editData;
 
@@ -14,10 +14,8 @@ const EditUserData = ({ onUpdateUser, editData, setEditData, data, setData, clos
     const onEditHandler = (e) => {
         e.preventDefault();
 
-        // let updataData = [...data, {...editData}];
         onUpdateUser(editData)
 
-        // setData(updataData);
         closeModal();
 
     };
@@ -82,7 +80,7 @@ const EditUserData = ({ onUpdateUser, editData, setEditData, data, setData, clos
         </Form.Controller>
         
         <div style={{ marginTop: '20px' }}>
-            <button style={{ marginRight: '20px' }} onClick={onEditHandler}>
+            <button onClick={onEditHandler}>
             Edit
             </button>
             

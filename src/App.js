@@ -84,7 +84,7 @@ function App() {
         {!edit ? 
         <Adduser addNewUserHandller={addNewUserHandller} closeModal={() => setShowModal(false)} />
         :
-        <EditUserData onUpdateUser={onUpdateUser} editData={editData} setEditData={setEditData} setData={setData} data={data} closeModal={() => setShowModal(false)}/>}
+        <EditUserData onUpdateUser={onUpdateUser} editData={editData} setEditData={setEditData} closeModal={() => setShowModal(false)}/>}
       </Modal>
       
     </Fragment>
