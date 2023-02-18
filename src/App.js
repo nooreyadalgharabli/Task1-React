@@ -1,17 +1,18 @@
-import { useState } from 'react';
-import Table from './component/Table';
-import Modal from './component/Modal/Modal';
-import Adduser from './component/Adduser/Adduser';
-import EditUserData from './component/EditUserData/EditUserData';
 import './App.css';
-
-import { GlobalProvider } from './context/GlobalState';
+import { Provider } from 'react-redux';
+import store from './redux/store'
+import UserContainer from './components/UserContainer';
+import { useState } from 'react';
+import Modal from './components/Modal/Modal'
+import EditUserContainer from './components/EditUserContainer';
+import AddUserContainer from './components/AddUserContainer';
 
 
 function App() {
 
   const [showModal, setShowModal] = useState(false);
   const [edit, setEdit] = useState(true);
+
   const [editData, setEditData] = useState([{
     id: "",
     first_name: "",
@@ -30,32 +31,23 @@ function App() {
   }
 
   return (
-    <GlobalProvider>
-
+    <Provider store={store}>
       <div className="App">
 
-        <button 
-          onClick= {() => onclickAdd() } 
-          className="btn-add"
-        >
-          Add New User
-        </button>
+        <button className="btn-add" onClick={onclickAdd}> Add New User </button>
+        <UserContainer setEditData={setEditData} setShowModal={onclickEdit}/>
 
-        <Table setEditData={setEditData} setShowModale={onclickEdit}/>
+        <Modal show={showModal} closeModal={() => setShowModal(false)}> 
+          {edit ?
+          <EditUserContainer editData={editData} setEditData={setEditData} closeModal={() => setShowModal(false)}/>
+          :
+          <AddUserContainer closeModal={() => setShowModal(false)}/>
+          }
+        </Modal>
 
       </div>
-
-      <Modal show={showModal} closeModal={() => setShowModal(false)}>
-      
-        {!edit ? 
-        <Adduser closeModal={() => setShowModal(false)} />
-        :
-        <EditUserData editData={editData} setEditData={setEditData} closeModal={() => setShowModal(false)}/>}
-      </Modal>
-      
-    </GlobalProvider>
+    </Provider>
   );
 }
-
 
 export default App;

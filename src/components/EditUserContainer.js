@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
-import { GlobalContext } from '../../context/GlobalState';
-import Form from '../Form/Form';
+import React from 'react'
+import { useDispatch } from 'react-redux';
+import { editUser } from '../redux';
+import Form from './Form/Form'
 
+function EditUserContainer({ editData, setEditData, closeModal}) {
 
-const EditUserData = ({ editData, setEditData, closeModal}) => {
-
-    const {onUpdateUser} = useContext(GlobalContext)
+    const dispatch = useDispatch()
 
     let {id, first_name, last_name, avatar, email} = editData;
 
@@ -16,9 +16,8 @@ const EditUserData = ({ editData, setEditData, closeModal}) => {
     const onEditHandler = (e) => {
         e.preventDefault();
 
-        onUpdateUser(editData)
+        dispatch(editUser(editData))
         
-
         closeModal();
 
     };
@@ -81,16 +80,16 @@ const EditUserData = ({ editData, setEditData, closeModal}) => {
             onChange={handleEditChange}
             />
         </Form.Controller>
+    
+    <div style={{ marginTop: '20px' }}>
+        <button onClick={onEditHandler}>
+        Edit
+        </button>
         
-        <div style={{ marginTop: '20px' }}>
-            <button onClick={onEditHandler}>
-            Edit
-            </button>
-            
-        </div>
+    </div>
 
-    </Form>
+</Form>
   )
 }
 
-export default EditUserData
+export default EditUserContainer
