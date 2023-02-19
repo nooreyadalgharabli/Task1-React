@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { GlobalContext } from '../../context/GlobalState';
 import Form from '../Form/Form';
 
 
-const EditUserData = ({ onUpdateUser, editData, setEditData, data, setData, closeModal}) => {
+const EditUserData = ({ editData, setEditData, closeModal}) => {
+
+    const {onUpdateUser} = useContext(GlobalContext)
 
     let {id, first_name, last_name, avatar, email} = editData;
 
@@ -10,14 +13,12 @@ const EditUserData = ({ onUpdateUser, editData, setEditData, data, setData, clos
         setEditData({...editData, [e.target.name]: e.target.value })
     }
 
-
     const onEditHandler = (e) => {
         e.preventDefault();
 
-        // let updataData = [...data, {...editData}];
         onUpdateUser(editData)
+        
 
-        // setData(updataData);
         closeModal();
 
     };
@@ -82,7 +83,7 @@ const EditUserData = ({ onUpdateUser, editData, setEditData, data, setData, clos
         </Form.Controller>
         
         <div style={{ marginTop: '20px' }}>
-            <button style={{ marginRight: '20px' }} onClick={onEditHandler}>
+            <button onClick={onEditHandler}>
             Edit
             </button>
             

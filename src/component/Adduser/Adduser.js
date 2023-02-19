@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { GlobalContext } from '../../context/GlobalState';
 import Form from '../Form/Form'
 
-const Adduser = ({ addNewUserHandller, closeModal }) => {
+const Adduser = ({ closeModal }) => {
+
+    const {addNewUserHandller} = useContext(GlobalContext)
 
     
     const [fname, setFName] = useState('');
@@ -72,7 +75,7 @@ const Adduser = ({ addNewUserHandller, closeModal }) => {
         </Form.Controller>
         
         <div style={{ marginTop: '20px' }}>
-            <button style={{ marginRight: '20px' }} onClick={onSubmitHandler}>
+            <button onClick={onSubmitHandler}>
             Save
             </button>
 
