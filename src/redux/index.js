@@ -1,4 +1,4 @@
 export * from './user/userActions';
 export { deleteUser } from './user/deleteUserActions';
-export { editUser } from './user/editUserActions';
-export { addUser } from './user/addUserActions';
+export { editUser, captureEditID, onChangeEditUser } from './user/editUserActions';
+export { addUser, onChangeADDUser } from './user/addUserActions';

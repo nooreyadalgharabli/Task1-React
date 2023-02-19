@@ -1,10 +1,11 @@
-import { ADD_USER, DELETE_USER, EDIT_USER, FETCH_USERS_FAILURE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS } from "./userTypes"
+import { ADD_CHANGE, ADD_USER, CAPTUREID, DELETE_USER, EDIT_CHANGE, EDIT_USER, FETCH_USERS_FAILURE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS } from "./userTypes"
 
 const initialState = {
     loading: false,
     users: [],
     error: '',
-    // editData: {}
+    editData: [],
+    addData: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -42,11 +43,21 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 users: [...state.users, action.payload]
             }
-        // case CAPTUREID:
-        //     return {
-        //         ...state,
-        //         editData: action.payload
-        //     }
+        case ADD_CHANGE:
+            return{
+                ...state,
+                addData: { ...state.addData, [action.payload.target.id] : action.payload.target.value }
+            }
+        case CAPTUREID:
+            return {
+                ...state,
+                editData: state.users.find(user => user.id === action.payload)
+            }
+        case EDIT_CHANGE:
+            return {
+                ...state,
+                editData: {...state.editData, [action.payload.target.name]: action.payload.target.value }
+            }
         default: return state
     }
 }

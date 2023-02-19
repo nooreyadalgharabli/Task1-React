@@ -1,55 +1,49 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addUser } from "../redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, onChangeADDUser } from "../redux";
 import Form from "./Form/Form";
 
 const AddUserContainer = ({ closeModal }) => {
 
+    const addData = useSelector((state) => state.userData.addData);
     const dispatch = useDispatch();
 
-    const [fname, setFName] = useState('');
-    const [lname, setLName] = useState('');
-    const [avatar, setAvatar] = useState('');
-    const [email, setEmail] = useState('');
+    const { first_name, last_name, avatar, email } = addData;
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
     
         dispatch(addUser({
           id: Math.round(Math.random() * 100),
-          first_name: fname,
-          last_name: lname,
+          first_name,
+          last_name,
           avatar,
           email,
         }));
 
-        setFName('');
-        setLName('');
-        setAvatar('');
-        setEmail('');
         closeModal();
       };
 
   return (
     <Form>
       <Form.Controller>
-        <label htmlFor="fname">First name</label>
+        <label htmlFor="first_name">First name</label>
         <input
           type="text"
-          id="fname"
+          id="first_name"
           placeholder="Enter First name"
-          value={fname}
-          onChange={(e) => setFName(e.target.value)}
+          value={first_name}
+          onChange={(e) => dispatch(onChangeADDUser(e))}
         />
       </Form.Controller>
       <Form.Controller>
-        <label htmlFor="lname">Last name</label>
+        <label htmlFor="last_name">Last name</label>
         <input
           type="text"
-          id="lname"
+          id="last_name"
           placeholder="Enter Last name"
-          value={lname}
-          onChange={(e) => setLName(e.target.value)}
+          value={last_name}
+          onChange={(e) => dispatch(onChangeADDUser(e))}
         />
       </Form.Controller>
       <Form.Controller>
@@ -59,7 +53,7 @@ const AddUserContainer = ({ closeModal }) => {
           id="avatar"
           placeholder="Enter source of avatar"
           value={avatar}
-          onChange={(e) => setAvatar(e.target.value)}
+          onChange={(e) => dispatch(onChangeADDUser(e))}
         />
       </Form.Controller>
       <Form.Controller>
@@ -69,7 +63,7 @@ const AddUserContainer = ({ closeModal }) => {
           id="email"
           placeholder="Enter email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => dispatch(onChangeADDUser(e))}
         />
       </Form.Controller>
 

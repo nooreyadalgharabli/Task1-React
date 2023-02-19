@@ -6,5 +6,7 @@ export const DELETE_USER = 'DELETE_USER';
 
 export const EDIT_USER = 'EDIT_USER';
 export const CAPTUREID = 'CAPTUREID';
+export const EDIT_CHANGE = 'EDIT_CHANGE';
 
 export const ADD_USER = 'ADD_USER';
+export const ADD_CHANGE = 'ADD_CHANGE';

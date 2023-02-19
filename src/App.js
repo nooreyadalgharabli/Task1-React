@@ -11,15 +11,7 @@ import AddUserContainer from './components/AddUserContainer';
 function App() {
 
   const [showModal, setShowModal] = useState(false);
-  const [edit, setEdit] = useState(true);
-
-  const [editData, setEditData] = useState([{
-    id: "",
-    first_name: "",
-    last_name: "",
-    avatar: "",
-    email: "",
-  }]);  
+  const [edit, setEdit] = useState(true); 
 
   const onclickAdd = () => {
     setShowModal(true)
@@ -35,11 +27,11 @@ function App() {
       <div className="App">
 
         <button className="btn-add" onClick={onclickAdd}> Add New User </button>
-        <UserContainer setEditData={setEditData} setShowModal={onclickEdit}/>
+        <UserContainer setShowModal={onclickEdit}/>
 
         <Modal show={showModal} closeModal={() => setShowModal(false)}> 
           {edit ?
-          <EditUserContainer editData={editData} setEditData={setEditData} closeModal={() => setShowModal(false)}/>
+          <EditUserContainer closeModal={() => setShowModal(false)}/>
           :
           <AddUserContainer closeModal={() => setShowModal(false)}/>
           }

@@ -1,17 +1,14 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
-import { editUser } from '../redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { editUser, onChangeEditUser } from '../redux';
 import Form from './Form/Form'
 
-function EditUserContainer({ editData, setEditData, closeModal}) {
+function EditUserContainer({closeModal}) {
 
+    const editData = useSelector((state) => state.userData.editData)
     const dispatch = useDispatch()
 
     let {id, first_name, last_name, avatar, email} = editData;
-
-    const handleEditChange = (e) => {
-        setEditData({...editData, [e.target.name]: e.target.value })
-    }
 
     const onEditHandler = (e) => {
         e.preventDefault();
@@ -32,7 +29,7 @@ function EditUserContainer({ editData, setEditData, closeModal}) {
             id='id'
             placeholder='Enter Id'
             value={id}
-            onChange={handleEditChange}
+            onChange={(e) => dispatch(onChangeEditUser(e))}
             />
         </Form.Controller>
         <Form.Controller>
@@ -43,7 +40,7 @@ function EditUserContainer({ editData, setEditData, closeModal}) {
             id='first_name'
             placeholder='Enter First name'
             value={first_name}
-            onChange={handleEditChange}
+            onChange={(e) => dispatch(onChangeEditUser(e))}
             />
         </Form.Controller>
         <Form.Controller>
@@ -54,7 +51,7 @@ function EditUserContainer({ editData, setEditData, closeModal}) {
             id='last_name'
             placeholder='Enter Last name'
             value={last_name}
-            onChange={handleEditChange}
+            onChange={(e) => dispatch(onChangeEditUser(e))}
             />
         </Form.Controller>
 
@@ -66,7 +63,7 @@ function EditUserContainer({ editData, setEditData, closeModal}) {
             id='avatar'
             placeholder='Enter source of avatar'
             value={avatar}
-            onChange={handleEditChange}
+            onChange={(e) =>dispatch(onChangeEditUser(e))}
             />
         </Form.Controller>
         <Form.Controller>
@@ -77,7 +74,7 @@ function EditUserContainer({ editData, setEditData, closeModal}) {
             id='email'
             placeholder='Enter email'
             value={email}
-            onChange={handleEditChange}
+            onChange={(e) => dispatch(onChangeEditUser(e))}
             />
         </Form.Controller>
     

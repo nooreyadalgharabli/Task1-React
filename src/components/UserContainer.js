@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteUser, fetchUsers } from '../redux'
+import { captureEditID, deleteUser, fetchUsers } from '../redux'
 import '../App.css'
 
-function UserContainer({ setEditData, setShowModal}) {
+function UserContainer({setShowModal}) {
 
     const userData = useSelector((state) => state.userData.users);
     const dispatch = useDispatch()
@@ -11,12 +11,6 @@ function UserContainer({ setEditData, setShowModal}) {
     useEffect(() => {
         dispatch(fetchUsers())
     }, [dispatch])
-
-    // capture the user you wish to edit, set to state
-  function captureEdit(clickedID) {
-    let filtered = userData.find(customer => customer.id === clickedID)
-    setEditData(filtered)
-  }
 
     const table = userData.map(({id, first_name, last_name, avatar, email}) => {
         return (
@@ -30,7 +24,7 @@ function UserContainer({ setEditData, setShowModal}) {
               </td>
               <td>{email}</td>
               <td>
-                <button className="btn-edit" onClick={() => { setShowModal(); captureEdit(id)}}>Edit</button>
+                <button className="btn-edit" onClick={() => { setShowModal(); dispatch(captureEditID(id))}}>Edit</button>
                 <button onClick={() => dispatch(deleteUser(id))}>Delete</button>
               </td>
             </tr>
