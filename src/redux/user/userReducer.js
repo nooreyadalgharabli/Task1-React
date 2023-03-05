@@ -41,7 +41,8 @@ const reducer = (state = initialState, action) => {
         case ADD_USER:
             return {
                 ...state,
-                users: [...state.users, action.payload]
+                users: [...state.users, action.payload],
+                addData : {first_name : '', last_name: '', email: '', avatar: ''}
             }
         case ADD_CHANGE:
             return{

@@ -14,7 +14,7 @@ const AddUserContainer = ({ closeModal }) => {
         e.preventDefault();
     
         dispatch(addUser({
-          id: Math.round(Math.random() * 100),
+          id: Math.round((Math.random() * 100) + 6),
           first_name,
           last_name,
           avatar,
